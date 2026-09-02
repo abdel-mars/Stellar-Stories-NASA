@@ -68,7 +68,9 @@ These are the same NASA sources our story cites, chosen so children (and the gro
 
 ## 🚀 See it yourself
 
-The whole story runs in your browser — no account, no downloads.
+**Read it live (GitHub Pages):** <https://abdel-mars.github.io/Stellar-Stories-NASA/>
+
+Or run it on your own machine — no account, no downloads:
 
 ```bash
 npm install
