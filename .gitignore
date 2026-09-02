@@ -1,0 +1,6 @@
+node_modules
+dist
+*.tsbuildinfo
+
+# Local dev aid — not part of the story
+hotspot-finder.html

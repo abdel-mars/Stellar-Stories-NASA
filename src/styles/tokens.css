@@ -1,0 +1,77 @@
+/* ─── Design Tokens ──────────────────────────────────────────────────────── */
+/* Stellar Stories — NASA Space Apps Challenge                                */
+
+:root {
+  /* ── Night Sky Palette ─── */
+  --color-deep-space:    #04050F;
+  --color-midnight:      #0A0E27;
+  --color-night:         #111633;
+  --color-dusk:          #1A1F4A;
+
+  /* ── Aurora Colors ─── */
+  --color-aurora-green:  #57E89C;
+  --color-aurora-teal:   #2DD4BF;
+  --color-aurora-purple: #A78BFA;
+  --color-aurora-pink:   #F472B6;
+
+  /* ── Solar Colors ─── */
+  --color-solar-gold:    #FCD34D;
+  --color-solar-orange:  #FB923C;
+  --color-solar-red:     #EF4444;
+
+  /* ── Neutral / UI ─── */
+  --color-snow:          #F0F4F8;
+  --color-frost:         #CBD5E1;
+  --color-mist:          #94A3B8;
+  --color-shadow:        rgba(0, 0, 0, 0.6);
+
+  /* ── Typography ─── */
+  --font-story:    'Lora', Georgia, serif;
+  --font-ui:       'Inter', system-ui, sans-serif;
+  --font-lina:     'Caveat', cursive;
+
+  --text-xs:       clamp(0.7rem, 1.5vw, 0.8rem);
+  --text-sm:       clamp(0.85rem, 2vw, 1rem);
+  --text-base:     clamp(1rem, 2.5vw, 1.2rem);
+  --text-lg:       clamp(1.2rem, 3vw, 1.5rem);
+  --text-xl:       clamp(1.5rem, 4vw, 2rem);
+  --text-2xl:      clamp(2rem, 5vw, 3rem);
+  --text-hero:     clamp(2.5rem, 7vw, 4.5rem);
+
+  /* ── Spacing ─── */
+  --space-xs:      0.25rem;
+  --space-sm:      0.5rem;
+  --space-md:      1rem;
+  --space-lg:      1.5rem;
+  --space-xl:      2rem;
+  --space-2xl:     3rem;
+  --space-3xl:     5rem;
+
+  /* ── Animation ─── */
+  --ease-smooth:   cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-bounce:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-dramatic: cubic-bezier(0.7, 0, 0.3, 1);
+
+  --duration-fast:   150ms;
+  --duration-normal: 300ms;
+  --duration-slow:   600ms;
+  --duration-scene:  1200ms;
+
+  /* ── Z-Index Layers ─── */
+  --z-background:  0;
+  --z-scene:       10;
+  --z-hotspot:     20;
+  --z-dialogue:    30;
+  --z-transition:  40;
+  --z-ui:          50;
+}
+
+/* ── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast:   0ms;
+    --duration-normal: 0ms;
+    --duration-slow:   0ms;
+    --duration-scene:  200ms;
+  }
+}

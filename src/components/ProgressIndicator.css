@@ -1,0 +1,25 @@
+/* ─── Progress Indicator ─────────────────────────────────────────────────── */
+
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-ui);
+  padding: 0;
+  pointer-events: none;
+}
+
+.progress__track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.progress__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-aurora-green), var(--color-aurora-teal));
+  transition: width 1s var(--ease-smooth);
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 12px rgba(87, 232, 156, 0.3);
+}

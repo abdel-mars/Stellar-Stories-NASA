@@ -1,0 +1,182 @@
+/* ─── SparkScene: Spark the science guide ──────────────────────────────── */
+
+.spark-scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Phase artwork — full-bleed, eases in with a subtle settle */
+.spark-scene__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.0;
+  transform: scale(1.06);
+  transition:
+    opacity 1.6s var(--ease-smooth),
+    transform 3s var(--ease-smooth);
+  filter: saturate(0.96);
+}
+
+.spark-scene__bg--alive {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ─── Spark — a tiny glowing aurora particle ─── */
+.spark-scene__spark {
+  position: absolute;
+  z-index: 3;
+  width: 96px;
+  height: 96px;
+  top: 58%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-smooth);
+}
+
+.spark-scene__spark--visible {
+  opacity: 1;
+}
+
+.spark-scene__spark-dot {
+  position: relative;
+  display: block;
+  width: 34px;
+  height: 34px;
+  margin: auto;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #eafff3, var(--color-aurora-green) 45%, #1f9d6d 100%);
+  box-shadow:
+    0 0 18px 4px rgba(87, 232, 156, 0.75),
+    0 0 46px 12px rgba(87, 232, 156, 0.35);
+  animation: spark-bob 2.6s ease-in-out infinite;
+}
+
+.spark-scene__spark-glow {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(87, 232, 156, 0.35) 0%, transparent 70%);
+  animation: spark-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes spark-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+@keyframes spark-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50%      { transform: scale(1.4); opacity: 0.25; }
+}
+
+/* ─── Spark's one idea ─── */
+.spark-scene__line {
+  position: absolute;
+  z-index: 2;
+  bottom: 14%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: min(88vw, 760px);
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-story);
+  font-size: var(--text-lg);
+  line-height: 1.35;
+  color: var(--color-snow);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: 18px;
+  background: linear-gradient(to top, rgba(4, 5, 15, 0.82), rgba(10, 14, 39, 0.4));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.spark-scene__who {
+  color: var(--color-aurora-green);
+  font-family: var(--font-lina);
+  font-size: var(--text-base);
+  letter-spacing: 0.02em;
+}
+
+/* ─── Tap hint ─── */
+.spark-scene__hint {
+  position: absolute;
+  z-index: 2;
+  top: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-frost);
+  opacity: 0.85;
+  animation: hint-nudge 2.4s ease-in-out infinite;
+}
+
+@keyframes hint-nudge {
+  0%, 100% { transform: translate(-50%, 0); }
+  50%      { transform: translate(-50%, -6px); }
+}
+
+/* ─── Travelling flash when Spark departs ─── */
+.spark-scene__travel {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: radial-gradient(circle at 50% 58%, rgba(87, 232, 156, 0.18) 0%, transparent 55%);
+  pointer-events: none;
+  animation: travel-shimmer 0.7s ease-out;
+}
+
+@keyframes travel-shimmer {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ─── NASA source credit, small ─── */
+.spark-scene__source {
+  position: absolute;
+  z-index: 5;
+  left: var(--space-md);
+  bottom: var(--space-sm);
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  color: var(--color-mist);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  background: rgba(4, 5, 15, 0.55);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+.spark-scene__source:hover {
+  color: var(--color-snow);
+  text-decoration: underline;
+}
+
+.spark-scene__source::before {
+  content: 'NASA · ';
+  color: var(--color-aurora-green);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spark-scene__spark-dot,
+  .spark-scene__spark-glow,
+  .spark-scene__hint {
+    animation: none;
+  }
+}

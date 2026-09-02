@@ -1,0 +1,220 @@
+/* ─── Camera Interaction ─────────────────────────────────────────────────── */
+
+.camera {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-deep-space);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera__aurora-view {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.camera__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.45s var(--ease-smooth);
+}
+
+.camera__photo--blur {
+  filter: blur(10px) saturate(0.9);
+}
+
+.camera__viewfinder {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.camera__bar {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.camera__bar--top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 12vh;
+}
+
+.camera__bar--bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 14vh;
+}
+
+.camera__bar--left {
+  top: 12vh;
+  bottom: 14vh;
+  left: 0;
+  width: 8vw;
+}
+
+.camera__bar--right {
+  top: 12vh;
+  bottom: 14vh;
+  right: 0;
+  width: 8vw;
+}
+
+.camera__grid {
+  position: absolute;
+  top: 12vh;
+  bottom: 14vh;
+  left: 8vw;
+  right: 8vw;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 33.333% 33.333%;
+}
+
+.camera__focus-ring {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  border: 2px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: all var(--duration-normal) var(--ease-bounce);
+}
+
+.camera__focus-ring--locked {
+  border-style: solid;
+  border-color: var(--color-aurora-green);
+  box-shadow: 0 0 24px rgba(87, 232, 156, 0.5);
+}
+
+.camera__focus-ring--hunting {
+  border-color: rgba(252, 211, 77, 0.7);
+}
+
+.camera__info {
+  position: absolute;
+  bottom: 16vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--space-lg);
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  color: var(--color-frost);
+  letter-spacing: 0.1em;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 16px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.camera__instruction {
+  position: absolute;
+  top: 15vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-snow);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: var(--space-xs) var(--space-md);
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+.camera__instruction--ready {
+  color: var(--color-aurora-green);
+  border-color: rgba(87, 232, 156, 0.4);
+  box-shadow: 0 0 20px rgba(87, 232, 156, 0.2);
+}
+
+.camera__focus-target {
+  position: absolute;
+  top: 25%;
+  left: 30%;
+  width: 40vw;
+  height: 35vh;
+  z-index: 15;
+  cursor: pointer;
+  background: transparent;
+}
+
+.camera__shutter {
+  position: absolute;
+  bottom: 3vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 3px solid var(--color-snow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.camera__shutter-inner {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-snow);
+  transition: background var(--duration-fast);
+}
+
+.camera__shutter:hover .camera__shutter-inner {
+  background: var(--color-aurora-green);
+}
+
+.camera__flash {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  background: #ffffff;
+}
+
+.camera__captured {
+  position: absolute;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.camera__captured-text {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-family: var(--font-ui);
+  font-size: var(--text-hero);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--color-snow);
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+}

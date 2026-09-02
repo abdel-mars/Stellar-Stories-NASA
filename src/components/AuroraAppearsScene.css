@@ -1,0 +1,184 @@
+/* ─── Aurora Appears Scene ───────────────────────────────────────────────── */
+
+.aurora-scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aurora-scene__bg-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Stage A — the sky coming alive: the frame sits calm and soft */
+.aurora-scene__bg-img--calm {
+  animation: calm-breathe 6s ease-in-out infinite alternate;
+}
+
+@keyframes calm-breathe {
+  0%   { opacity: 0.85; filter: brightness(0.9) blur(0); }
+  50%  { opacity: 1;    filter: brightness(1.05) blur(1px); }
+  100% { opacity: 0.92; filter: brightness(0.95) blur(0); }
+}
+
+/* ─── Stage B — camera "setting up" on frame1 ─── */
+/* The photograph pans left-right while a focus scan and a band of
+   aurora light sweep across it — reads as the camera preparing. */
+.aurora-scene__compose {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* The photograph fills the frame; the camera-style pan is done on
+   object-position (centered at 50%), so it always centers. */
+.aurora-scene__compose .aurora-scene__bg-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: object-position;
+}
+
+/* Autofocus scan bar sweeping left-right */
+.aurora-scene__scanline {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 26%;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(125, 211, 252, 0.08),
+    rgba(255, 255, 255, 0.12),
+    rgba(125, 211, 252, 0.08),
+    transparent
+  );
+  filter: blur(10px);
+  animation: scan-sweep 6s ease-in-out infinite;
+}
+
+@keyframes scan-sweep {
+  0%   { transform: translateX(-180%); }
+  50%  { transform: translateX(480%); }
+  100% { transform: translateX(-180%); }
+}
+
+/* The sky coming alive — a soft band of aurora light sweeping across */
+.aurora-scene__lightsweep {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 55%;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(87, 232, 156, 0.12) 35%,
+    rgba(167, 139, 250, 0.12) 65%,
+    transparent
+  );
+  filter: blur(20px);
+  mix-blend-mode: screen;
+  animation: light-sweep 9s ease-in-out infinite;
+}
+
+@keyframes light-sweep {
+  0%   { transform: translateX(-260%); }
+  60%  { transform: translateX(320%); }
+  100% { transform: translateX(-260%); }
+}
+
+.aurora-scene__ribbons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  transform-origin: bottom center;
+  background:
+    radial-gradient(ellipse at 30% 70%, rgba(87, 232, 156, 0.35) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(45, 212, 191, 0.25) 0%, transparent 35%),
+    radial-gradient(ellipse at 70% 60%, rgba(167, 139, 250, 0.2) 0%, transparent 40%),
+    radial-gradient(ellipse at 40% 40%, rgba(87, 232, 156, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 30%, rgba(244, 114, 182, 0.1) 0%, transparent 40%);
+  filter: blur(12px);
+  animation: aurora-dance 8s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+@keyframes aurora-dance {
+  0%   { transform: scaleX(1) translateX(0); filter: blur(12px) hue-rotate(0deg); }
+  33%  { transform: scaleX(1.1) translateX(-2%); filter: blur(14px) hue-rotate(10deg); }
+  66%  { transform: scaleX(0.95) translateX(2%); filter: blur(10px) hue-rotate(-5deg); }
+  100% { transform: scaleX(1.05) translateX(-1%); filter: blur(13px) hue-rotate(5deg); }
+}
+
+.aurora-scene__ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background:
+    linear-gradient(175deg, transparent 20%, #0a1020 22%, #0c1424 26%, transparent 28%),
+    linear-gradient(185deg, transparent 15%, #0b1222 17%, #0d1628 22%, transparent 24%),
+    linear-gradient(to top, #1a2040 0%, #151c38 40%, #111a30 70%, transparent 100%);
+  z-index: 2;
+}
+
+.aurora-scene__narration {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+}
+
+.aurora-scene__action-area {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.aurora-scene__text {
+  text-align: center;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.aurora-scene__text--narrator {
+  font-family: var(--font-story);
+  font-size: var(--text-xl);
+  font-style: italic;
+  color: var(--color-frost);
+}
+
+.aurora-scene__text--lina {
+  font-family: var(--font-lina);
+  font-size: var(--text-2xl);
+  color: var(--color-aurora-green);
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-scene__compose .aurora-scene__bg-img,
+  .aurora-scene__scanline,
+  .aurora-scene__lightsweep {
+    animation: none;
+  }
+}
